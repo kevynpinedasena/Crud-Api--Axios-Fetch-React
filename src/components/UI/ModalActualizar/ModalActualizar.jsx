@@ -4,10 +4,9 @@ import { Input } from "../Input/Input";
 import Swal from "sweetalert2";
 
 
-export const ModalActualizar = ( {documento, nombre, apellido, telefono, correo} ) => {
+export const ModalActualizar = ( {documento, nombre, apellido, telefono, correo, funListaUsuarios} ) => {
 
     const [modal, setModal] = useState(false);
-    const [valorDoc, setValorDoc] = useState("");
     const [valorNom, setValorNom] = useState("");
     const [valorApe, setValorApe] = useState("");
     const [valorTel, setValorTel] = useState("");
@@ -27,14 +26,7 @@ export const ModalActualizar = ( {documento, nombre, apellido, telefono, correo}
         cerrarModal();
     }
 
-    const cargar = () => {
-        setTimeout( () => {
-            window.location.reload("http://localhost:3000/")
-        })
-    }
-
     const actualizar = () => {
-        console.log(valorDoc, valorNom, valorApe, valorTel, valorCorreo);
         let URL = 'http://localhost:8080/api/usuarios/'+documento;
 
         if (valorNom === "") {
@@ -63,11 +55,7 @@ export const ModalActualizar = ( {documento, nombre, apellido, telefono, correo}
             .then( (respuesta) => {
                 if (respuesta.status === 201) {
                     Swal.fire("Actualizado Exitosamente", "Usuario Actualizado con exito", "success")
-                    .then( (ok) => {
-                        if (ok) {
-                            cargar();
-                        }
-                    });
+                    funListaUsuarios();
                     limpiar();
                 }
                 else if (respuesta.status === 400) {

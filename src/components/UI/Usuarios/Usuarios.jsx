@@ -3,16 +3,9 @@ import Eliminar from "../../../Images/eliminar.png";
 import { ModalActualizar } from "../ModalActualizar/ModalActualizar";
 import Swal from "sweetalert2";
 
-export const Usuarios = ( {usuario = []} ) => {
-
-    const cargar = () => {
-        setTimeout( () => {
-            window.location.reload("http://localhost:3000/")
-        })
-    }
+export const Usuarios = ( {usuario = [], listaUsuarios} ) => {
 
     const eliminarUsuario = (documento) => {
-        console.log(documento);
         let URL = 'http://localhost:8080/api/usuarios/'+documento;
 
         fetch(URL, {
@@ -21,11 +14,7 @@ export const Usuarios = ( {usuario = []} ) => {
         .then( (respuesta) => {
             if (respuesta.status === 200) {
                 Swal.fire("Eliminado Exitosamente", "Usuario Eliminado Correctamente", "success")
-                .then( (ok) => {
-                    if (ok) {
-                        cargar();
-                    }
-                })
+                listaUsuarios();
             }
             else if (respuesta.status === 404) {
                 Swal.fire("Error", "Usuario " + documento + " no Existe", "error");
@@ -63,7 +52,7 @@ export const Usuarios = ( {usuario = []} ) => {
                             <th scope="row">{item.apellido}</th>
                             <th scope="row">{item.telefono}</th>
                             <th scope="row">{item.correo}</th>
-                            <th><ModalActualizar documento={item.documento} nombre={item.nombre} apellido={item.apellido} telefono={item.telefono} correo={item.correo}/></th>
+                            <th><ModalActualizar documento={item.documento} nombre={item.nombre} apellido={item.apellido} telefono={item.telefono} correo={item.correo} funListaUsuarios={listaUsuarios}/></th>
                             <th><button id={item.documento} className="btnEliminar" onClick={ () => eliminarUsuario(item.documento)}><img className="imgEliminar" src={Eliminar} alt="eliminar" /></button></th>
                          </tr>   
                         ))

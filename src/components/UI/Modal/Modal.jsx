@@ -3,7 +3,7 @@ import { Input } from '../../UI/Input/Input';
 import Swal from 'sweetalert2'
 
 
-export const Modal = ( {titulo} ) => {
+export const Modal = ( {titulo, funListaUsuarios} ) => {
 
     const URL = 'http://localhost:8080/api/usuarios'
 
@@ -75,12 +75,7 @@ export const Modal = ( {titulo} ) => {
           .then( (respuesta) => {
             if (respuesta.status === 201) {
                 Swal.fire("Registro Exitoso", "Usuario Guardado Exitosamente", "success")
-                .then( (ok) => {
-                  if (ok) {
-                    // cargar();
-                  }
-                });
-                cerrarModal();
+                funListaUsuarios();
                 limpiar();
             }
             else{

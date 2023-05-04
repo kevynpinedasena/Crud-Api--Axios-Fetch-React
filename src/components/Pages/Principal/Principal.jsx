@@ -20,28 +20,17 @@ export const Principal = () => {
     .catch(error => console.log(error))
   }
 
-  useEffect ( () => {
-    async function datosTabla(){
-      const respuesta = await axios.get(URL);
-      setTamanio(respuesta.data);
-    }
-    datosTabla();
-  },[])
-
-  const numeroTabla = tamanio.length;
-  console.log(numeroTabla);
-
   useEffect( () => {
     ListaUsuarios();
   },[])
 
   return (
     <> 
-      <Modal titulo={"Registro Usuarios"}/>
-      <p>los numeros {numeroTabla}</p>
+      <Modal titulo={"Registro Usuarios"} funListaUsuarios={ListaUsuarios}/>
+
       <div className="gestionUsuario">
           <div className="contTabla">
-            <Usuarios usuario={user} />
+            <Usuarios usuario={user} listaUsuarios={ListaUsuarios} />
           </div>
       </div>
     </>
