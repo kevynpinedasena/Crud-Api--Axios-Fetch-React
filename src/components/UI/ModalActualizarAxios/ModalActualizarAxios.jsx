@@ -15,25 +15,41 @@ export const ModalActualizarAxios = ( {documento, nombre, apellido, telefono, co
     const [valorCorreo, setValorCorreo] = useState("");
 
     async function abrirModal(){
-        setModal(true);
+        try {
+            setModal(true);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     async function cerrarModal(){
-        setModal(false);
+        try {
+            setModal(false);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
 
 
     async function limpiar(){
-        informacion();
-        cerrarModal();
+        try {
+            informacion();
+            cerrarModal();
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     async function informacion(){
-        setValorNom(nombre);
-        setValorApe(apellido);
-        setValorTel(telefono);
-        setValorCorreo(correo);
+        try {
+            setValorNom(nombre);
+            setValorApe(apellido);
+            setValorTel(telefono);
+            setValorCorreo(correo);
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     async function actualizar(){
