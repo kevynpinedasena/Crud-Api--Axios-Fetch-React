@@ -52,6 +52,17 @@ export const ModalActualizarAxios = ( {documento, nombre, apellido, telefono, co
         }
     }
 
+    async function info(){
+        try {
+            setValorNom(valorNom);
+            setValorApe(valorApe);
+            setValorTel(valorTel);
+            setValorCorreo(valorCorreo);
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     async function actualizar(){
 
         try {
@@ -77,6 +88,7 @@ export const ModalActualizarAxios = ( {documento, nombre, apellido, telefono, co
                 if (respuesta.status === 201) {
                     Swal.fire("Exitoso¡","Actualizado Correctamente","success");
                     limpiar();
+                    info();
                     funcionListaUsuarios();
                 }
                 else{
